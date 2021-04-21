@@ -21,17 +21,18 @@ contract ICO {
     uint public minPurchase;
     uint public maxPurchase;
     Token public token;
-    IERC20 public dai = IERC20(0x6B175474E89094C44Da98b954EedeAC495271d0F);
+    IERC20 public dai;
     
     constructor(
         address tokenAddress,
+        address daiAddress,
         uint _duration,
         uint _price,
         uint _availableTokens,
         uint _minPurchase,
         uint _maxPurchase) {
         token = Token(tokenAddress);
-        
+        dai = IERC20(daiAddress);
         require(_duration > 0, 'duration should be > 0');
         require(
           _availableTokens > 0 && _availableTokens <= token.maxTotalSupply(), 
