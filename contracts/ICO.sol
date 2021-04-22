@@ -65,7 +65,7 @@ contract ICO {
           daiAmount >= minPurchase && daiAmount <= maxPurchase, 
           'have to buy between minPurchase and maxPurchase'
         );
-        uint tokenAmount = daiAmount.div(price);
+        uint tokenAmount = daiAmount.div(price) * (10 ** 18);
         require(
           tokenAmount <= availableTokens, 
           'Not enough tokens left for sale'

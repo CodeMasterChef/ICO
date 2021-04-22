@@ -7,6 +7,7 @@ import './SafeMath.sol';
 contract Token is ERC20 {
   using SafeMath for uint;
   address public admin;
+  address public ico;
   uint public maxTotalSupply;
 
   constructor(
@@ -23,8 +24,13 @@ contract Token is ERC20 {
     admin = newAdmin;
   }
 
-  function mint(address account, uint256 amount) external {
+  function updateICO(address newICO) external {
     require(msg.sender == admin, 'only admin');
+    ico = newICO;
+  }
+
+  function mint(address account, uint256 amount) external {
+    require(msg.sender == ico, 'only ICO');
     uint totalSupply = totalSupply();
     require(
       totalSupply.add(amount) <= maxTotalSupply, 
